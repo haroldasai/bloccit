@@ -9,18 +9,35 @@ require 'random_data'
     body:   RandomData.random_paragraph
   )
 end
+
+puts "There are #{Post.count} posts in total before creating a unique post."
+#Create a unique post
+Post.find_or_create_by(
+  title:  "Unique post",
+  body:   "Unique body"
+)
+
+puts "There are #{Post.count} posts in total after creating a unique post."
+
 posts = Post.all
  
 # Create Comments
-# #3
 100.times do
   Comment.create!(
-# #4
     post: posts.sample,
     body: RandomData.random_paragraph
   )
 end
 
-puts "Seed finished"
-puts "#{Post.count} posts created"
-puts "#{Comment.count} comments created"
+puts "There are #{Comment.count} comments in total before creating a unique comment."
+#Create a unique comment
+upost = posts.find 51 
+Comment.find_or_create_by(
+  post:   upost,
+  body:   "Unique body"
+)
+
+puts "There are #{Comment.count} comments in total after creating a unique comment."
+
+#puts "Seed finished"
+
