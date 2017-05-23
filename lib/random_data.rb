@@ -23,4 +23,10 @@ module RandomData
     letters.shuffle!
     letters[0,rand(3..8)].join
   end
+
+  def self.random_integer
+    numbers = (20..40).to_a
+    numbers.shuffle!
+    numbers[0] * 10
+  end
 end
