@@ -36,4 +36,13 @@ RSpec.describe User, type: :model do
     end
  
   end
+
+  describe "Capital cased user name" do
+    let(:user_with_downcased_name) { User.create!(name: "harold asai", email: "user@bloccit.com", password: "password") }
+ 
+    it "should be an invalid user due to blank name" do
+      expect(user_with_downcased_name).to have_attributes(name: "Harold Asai", email: "user@bloccit.com")
+    end
+
+  end
 end
