@@ -1,0 +1,12 @@
+<div class="row">
+  <h2>Sign Up Confirmation</h2>
+  <h4>Are you sure these values are correct?</h4>
+  <br>
+
+  <p><b>Email:&nbsp;<%= @user.email %></b></p>
+  <p><b>Name:&nbsp;<%= @user.name %></b></p>
+  <br>
+  <%= button_to "Yes", {controller: "users", action: "create", params: params}, class: 'btn btn-success', form: {style: 'display:inline-block; margin-right:20px;'} %>
+  <%= link_to "No", new_user_path, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %>
+
+</div>  

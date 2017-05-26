@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'about' => 'welcome#about'
 
+  post 'users/confirm' => 'users#confirm'
+
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
