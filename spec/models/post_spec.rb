@@ -83,4 +83,28 @@ RSpec.describe Post, type: :model do
       end
     end
   end
+  
+  describe "#create_favorite" do
+ # #28
+    it "favorites new post" do
+      expect(post.favorites.count).to eq (1)
+    end
+
+    it "belongs to the user who created that post" do
+      expect(post.favorites.first.user).to eq (post.user)
+    end 
+
+    it "calls callback function create_favorite after saving the post" do
+      post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+      expect(post).to receive (:create_favorite)
+      post.save!
+    end
+
+    it "sends an email to user who created the post" do
+      post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+      expect(FavoriteMailer).to receive(:new_post).with(user, post).and_return(double(deliver_now: true))
+      post.save!
+    end
+  end
+
 end
