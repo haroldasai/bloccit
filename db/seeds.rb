@@ -47,6 +47,9 @@ require 'random_data'
 #end
 
  # Create an admin user
+
+if ENV["users"]
+
 admin = User.create!(
   name:     'Admin User',
   email:    'admin@example.com',
@@ -60,6 +63,9 @@ member = User.create!(
   email:    'member@example.com',
   password: 'helloworld'
 )
+
+end
+
 
 puts "Seed finished"
 puts "#{User.count} users created"
