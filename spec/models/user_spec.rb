@@ -120,4 +120,18 @@ RSpec.describe User, type: :model do
       expect(known_user.avatar_url(48)).to eq(expected_gravatar)
     end
   end
+
+  describe ".avatar_url-assignment" do
+ # #6
+    let(:author_user) { create(:user, email: "blochead@bloc.io") }
+    let(:follower_user) { create(:user, email: "example@example.com") }
+    let(:topic) {create(:topic)}
+ 
+    it "returns the proper Gravatar url for the author of a favorited post" do
+      post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: author_user)
+      favorite = Favorite.create!(user: follower_user, post: post)
+      expected_gravatar = "http://gravatar.com/avatar/bb6d1172212c180cfbdb7039129d7b03.png?s=48"
+      expect(follower_user.favorites.first.post.user.avatar_url(48)).to eq(expected_gravatar)
+    end
+  end
 end
